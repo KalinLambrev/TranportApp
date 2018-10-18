@@ -1,0 +1,12 @@
+<div class="dimScreen">
+    <form>
+        <div id="goTop">
+            <h2>DELIVERY</h2>
+        </div>
+        <div class="opacced">
+            <input type="text" #user class="form-control" id="username" placeholder="USER NAME" />
+            <input type="password" #pass class="form-control" placeholder="PASSWORD" />
+            <button (click)="loginUser(user.value, pass.value)" class="btn btn-primary" type="submit">Login</button>
+        </div>
+    </form>
+</div>

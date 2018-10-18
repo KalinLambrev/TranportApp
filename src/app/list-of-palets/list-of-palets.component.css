@@ -1,0 +1,23 @@
+.alertsContainer .alertsRow.success {
+    border: 1px solid #ffc549;
+}
+
+.alertsContainer .alertsRow.success.iconpanel {
+    background: #ffc549;
+    color: #fff;
+}
+
+.alertsContainer .alertsRow.success.messagepanel {
+    color: #000;
+    background: purple;
+}
+
+.alertsContainer .alertsRow.success.closeicon {
+    color: red;
+}
+
+.alertsContainer .alertsRow.success.closeicon a {
+    color: #000;
+    text-decoration: none;
+    font-size: 12px;
+}

@@ -1,0 +1,22 @@
+<h4>Transport</h4>
+<div>
+    <p>Натоварени палета: {{deliveryPaletes}}</p>
+    <p>Брой клиенти: {{client}}</p>
+    <p>Общо тегло: {{deliveryKg}}</p>
+    <p>Общ обем: {{deliveryVol}}</p>
+    <button type="submit" title="submit" (click)="goToDelivery()">Приеми</button>
+    <button type="submit" title="submit" (click)="updatePallets()">Обнови</button>
+</div>
+<div>
+    <ul>
+        <li *ngFor="let palet of paletes">
+            <span class="badge">Палет No.{{palet.palletId}}</span><br>
+            <span>Маршрут No.{{palet.routeId}}</span><br>
+            <span>{{palet.customerName}}</span><br>
+            <span>{{palet.streetName}}</span>
+            <button type="che" #add title="add" (click)="addToDeliveryList(palet)">+</button>
+            <button class="delete" title="remove" (click)="removeFromDeliveryList(palet)">x</button>
+            <hr>
+        </li>
+    </ul>
+</div>

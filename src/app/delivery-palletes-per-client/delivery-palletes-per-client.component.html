@@ -1,0 +1,46 @@
+<div>
+    <div>
+        <h3>
+            <span>{{displayCustomer.customerName}}</span>
+            <span>Брой палета: {{countPalletes}}</span>
+        </h3>
+        <table>
+            <tr>
+                <th *ngFor="let col of cols">{{col}}</th>
+            </tr>
+            <tr *ngFor="let pall of displayPalletes;">
+                <td>{{pall.palletId}}</td>
+                <td><button>+</button></td>
+                <td><button>x</button></td><br>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <li><span>Очаквана сума кеш: {{customer.sumCash}}</span></li>
+        <li><span>Очаквана сума банка</span>{{customer.sumBank}}</li>
+        <li><input appOnlyNumber #box (keyup)="onEnter(box.value)" placeholder="въведи сума"></li>
+        <li>
+            <mat-form-field>
+                <mat-select [(value)]="selected" placeholder="Моля изберете">
+                    <mat-option *ngFor="let sel of selecting" [value]="sel.value">
+                        {{sel.viewValue}}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="selectingControl.hasError('required')">Моля изберете възможност</mat-error>
+                <mat-hint><input *ngIf="[value]==5" show="true" type="text"></mat-hint>
+            </mat-form-field>
+        </li>
+        <button (click)="makeSignature()">ПОДПИС</button>
+        <button (click)="showSignature()">ПОКАЖИ</button>
+        <button>ЗАРЕДИ СНИМКА</button>
+        <button>ВИЖ</button>
+        <p><button>ЗАПАЗИ</button></p>
+    </div>
+    <div [hidden]="show">
+        <signature-pad [options]="signaturePadOptions"></signature-pad>
+        <button (click)="drawComplete()">Запази</button>
+        <button (click)="AfterViewInit()">Изчисти</button>
+    </div>
+    <angular-file-uploader [config]="afuConfig">
+    </angular-file-uploader>
+</div>
