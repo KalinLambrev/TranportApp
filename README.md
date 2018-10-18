@@ -1,2 +1,2 @@
-# TranportApp
-First angular application
+# TransportApp
+My first angular application
