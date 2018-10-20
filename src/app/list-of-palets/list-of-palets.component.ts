@@ -1,3 +1,5 @@
+import { AlertsService } from 'angular-alert-module';
+import { of } from 'rxjs';
 import { PaletService } from './../palet.service';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './../auth.service';
@@ -15,7 +17,8 @@ import { Router } from '@angular/router';
 export class ListOfPaletsComponent implements OnInit {
 
   constructor(private _authService: AuthService, private _paletService: PaletService,
-    location: PlatformLocation, private router: Router) {
+    location: PlatformLocation, private router: Router,
+    private alerts: AlertsService) {
     location.onPopState(() => {
       const confirmation = window.confirm('Желаете ли да смените доставчика?');
       const isUpdating = true;
@@ -64,7 +67,7 @@ export class ListOfPaletsComponent implements OnInit {
     }
     console.log(this.paletes);
     palet.status = 'NEW';
-    this.stePallets();
+    this.setPallets();
     console.log(palet.status);
     this.makePlusView(palet);
   }
@@ -79,14 +82,14 @@ export class ListOfPaletsComponent implements OnInit {
       } else {
         this.clients.delete(palet.customerName);
         palet.status = 'CANCELED';
-        this.stePallets();
+        this.setPallets();
         console.log(palet.status);
         console.log(this.paletes);
         return this.client;
       }
     }
     palet.status = 'CANCELED';
-    this.stePallets();
+    this.setPallets();
     console.log(palet.status);
     console.log(this.paletes);
     this.clients.delete(palet.customerName);
@@ -114,12 +117,21 @@ export class ListOfPaletsComponent implements OnInit {
   }
 
   goToDelivery() {
-    this.postPallets();
-    this._paletService.getRouteInfo();
-    this.router.navigate(['deliveryRoute']);
+    let permition = true;
+    for ( const pallete of this.paletes) {
+      if (pallete.status !== 'NEW' && pallete.status !== 'CANCELED') {
+        return permition = false,
+        this.alerts.setMessage('Има палета без статус...', 'error');
+      }
+    }
+    if (permition === true) {
+      this.postPallets();
+      this._paletService.getRouteInfo();
+      this.router.navigate(['deliveryRoute']);
+    }
   }
 
-  stePallets() {
+  setPallets() {
     this._paletService.setAllPallets(this.paletes);
   }
 
