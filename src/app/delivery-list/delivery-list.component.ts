@@ -34,7 +34,8 @@ export class DeliveryListComponent implements OnInit {
   }
   getClients() {
     for (const pal of this.allPallets) {
-      const clientList: DisplayClient = {
+      if (pal.status === 'NEW') {
+        const clientList: DisplayClient = {
           customerName: pal.customerName,
           streetName: pal.streetName,
           coordinate: pal.coordinates,
@@ -53,6 +54,7 @@ export class DeliveryListComponent implements OnInit {
         }
       }
     }
+      }
     console.log(this.displayList);
     this.paletService.setClientDetails(this.displayList);
     this.paletService.setRouteId(this.clientDetailId);
