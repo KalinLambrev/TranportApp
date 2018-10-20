@@ -9,21 +9,21 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { LoginComponent } from './login/login.component';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { ListOfPaletsComponent } from './list-of-palets/list-of-palets.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PageNotFoundComponent } from './not-found/not-found.component';
 import { DeliveryListComponent } from './delivery-list/delivery-list.component';
 import { AlertsModule } from 'angular-alert-module';
-import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
+import { AgmCoreModule } from '@agm/core';
 import { DeliveryPalletesPerClientComponent } from './delivery-palletes-per-client/delivery-palletes-per-client.component';
-import { ModalDialogModule, ModalDialogService } from 'ngx-modal-dialog';
-import { ModalComponentComponent } from './modal-component/modal-component.component';
-import { DialogService } from './dialog.service';
+import { ModalDialogModule } from 'ngx-modal-dialog';
 import { OnlyNumberDirective } from './only-number.directive';
 import {MatSelectModule} from '@angular/material/select';
 import { SignaturePadModule } from 'angular2-signaturepad';
 import { AngularFileUploaderModule } from 'angular-file-uploader';
+import {MatDialogModule} from '@angular/material/dialog';
+import { DialogComponent } from './dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -33,8 +33,8 @@ import { AngularFileUploaderModule } from 'angular-file-uploader';
     PageNotFoundComponent,
     DeliveryListComponent,
     DeliveryPalletesPerClientComponent,
-    ModalComponentComponent,
-    OnlyNumberDirective
+    OnlyNumberDirective,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
@@ -51,11 +51,12 @@ import { AngularFileUploaderModule } from 'angular-file-uploader';
     MatSelectModule,
     BrowserAnimationsModule,
     SignaturePadModule,
-    AngularFileUploaderModule
+    AngularFileUploaderModule,
+    MatDialogModule
   ],
-  entryComponents: [ ModalComponentComponent ],
+  entryComponents: [DialogComponent, DeliveryListComponent],
 
-  providers: [AuthService, AuthGuard, PaletService, CanDeactivateGuard, DialogService
+  providers: [AuthService, AuthGuard, PaletService, CanDeactivateGuard
   ],
   bootstrap: [AppComponent]
 })

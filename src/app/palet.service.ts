@@ -4,9 +4,8 @@ import { IPalet } from './palet';
 import { AuthService } from './auth.service';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, map } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { ICustomer } from './customer';
-import { IcuPlaceholder } from '@angular/compiler/src/i18n/i18n_ast';
 
 @Injectable()
 export class PaletService {
