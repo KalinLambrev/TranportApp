@@ -1,11 +1,11 @@
-import { ModalComponentComponent } from './../modal-component/modal-component.component';
+import { DialogComponent } from './../dialog/dialog.component';
 import { AlertsService } from 'angular-alert-module';
 import { Router } from '@angular/router';
 import { DisplayClient } from './../display-client';
 import { PaletService } from './../palet.service';
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { IPalet } from '../palet';
-import { ModalDialogService } from 'ngx-modal-dialog';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 @Component({
   selector: 'app-delivery-list',
@@ -14,8 +14,8 @@ import { ModalDialogService } from 'ngx-modal-dialog';
 })
 export class DeliveryListComponent implements OnInit {
   constructor(private paletService: PaletService, private route: Router,
-    private alerts: AlertsService, private modalService: ModalDialogService,
-    private viewRef: ViewContainerRef) { }
+    private alerts: AlertsService, private viewRef: ViewContainerRef,
+    public dialog: MatDialog) { }
 
   allPallets: IPalet[] = this.paletService.getAllPallets();
   columns = this.paletService.getColumns();
@@ -87,9 +87,10 @@ export class DeliveryListComponent implements OnInit {
   }
   gpBackIfYouWant() {
   }
-  postDeliveryPalletes () {
+  postDeliveryPalletes() {
     // this.paletService.makePost();
-    this.openNewDialog();
+    this.clickTopermission = true;
+    this.disabler = 1;
   }
   goToClientDetails (routeValue) {
     if (this.disabler === 1) {
@@ -101,12 +102,17 @@ export class DeliveryListComponent implements OnInit {
       this.paletService.setClientId(this.clientDetailId);
       return this.clientDetailId;
   }
-  openNewDialog() {
-    this.modalService.openDialog(this.viewRef, {
-      title: 'Some modal title',
-      childComponent: ModalComponentComponent,
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '250px'
     });
-    this.clickTopermission = true;
-    return this.disabler = 1;
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+      if (result === true) {
+        this.postDeliveryPalletes();
+      } else {
+        console.log('closed');
+      }
+    });
   }
 }

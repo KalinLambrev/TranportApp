@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Dialog Window</h1>
+<div mat-dialog-content>
+    <p>Желаете ли да приемете доставката</p>
+</div>
+<mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Ok</button>
+</mat-dialog-actions>

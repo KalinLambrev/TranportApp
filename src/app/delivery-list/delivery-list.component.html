@@ -10,10 +10,19 @@
         </tr>
     </table>
     <button type="back" title="back" (click)="gpBackIfYouWant()">Завършвам Маршрута</button>
-    <button [disabled]="clickTopermission" typq="submit" title="success" (click)="postDeliveryPalletes ()">Приемам Маршрута</button>
+    <button [disabled]="clickTopermission" typq="submit" title="success" (click)="openDialog()">Приемам Маршрута</button>
 </div>
 <div [hidden]="IsmodelShow" class="modal-dialog">
     <agm-map [latitude]="lat" [longitude]="lng">
         <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
     </agm-map>
 </div>
+<!-- <app-modal-component id="custom-modal-1">
+    <div class="modal">
+        <div class="modal-body">
+            <h1>A Custom Modal!</h1>
+            <button (click)="closeModal('custom-modal-1');">Close</button>
+        </div>
+    </div>
+    <div class="modal-background"></div>
+</app-modal-component> -->

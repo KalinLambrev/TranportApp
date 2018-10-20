@@ -77,9 +77,8 @@ export class DeliveryPalletesPerClientComponent implements OnInit {
     return this.signaturePadOptions;
   }
   AfterViewInit() {
-    // this.signaturePad is now available
-    this.signaturePad.set('minWidth', 5); // set szimek/signature_pad options at runtime
-    this.signaturePad.clear(); // invoke functions from szimek/signature_pad API
+    this.signaturePad.set('minWidth', 5);
+    this.signaturePad.clear();
   }
   drawComplete() {
     this.sign = this.signaturePad.toDataURL();
