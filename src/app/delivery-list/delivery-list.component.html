@@ -9,7 +9,7 @@
             <td (click)="IsmodelShow = false" (click)="parseCoordinates(client.coordinate)">{{client.distance}}</td>
         </tr>
     </table>
-    <button type="back" title="back" (click)="gpBackIfYouWant()">Завършвам Маршрута</button>
+    <button type="back" title="back" (click)="goBackIfYouWant()">Завършвам Маршрута</button>
     <button [disabled]="clickTopermission" typq="submit" title="success" (click)="openDialog()">Приемам Маршрута</button>
 </div>
 <div [hidden]="IsmodelShow" class="modal-dialog">
