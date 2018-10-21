@@ -5,7 +5,7 @@ import { DisplayClient } from './../display-client';
 import { PaletService } from './../palet.service';
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { IPalet } from '../palet';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-delivery-list',
@@ -19,8 +19,6 @@ export class DeliveryListComponent implements OnInit {
 
   allPallets: IPalet[] = this.paletService.getAllPallets();
   columns = this.paletService.getColumns();
-  map = new Map();
-  clientList;
   displayList: DisplayClient[] = [];
   lat: number;
   lng: number;
@@ -87,7 +85,7 @@ export class DeliveryListComponent implements OnInit {
     return this.lat = parseFloat(searchString.substring(0, commaPos)),
     this.lng = parseFloat(searchString.substring(commaPos + 1, searchString.length));
   }
-  gpBackIfYouWant() {
+  goBackIfYouWant() {
   }
   postDeliveryPalletes() {
     // this.paletService.makePost();
