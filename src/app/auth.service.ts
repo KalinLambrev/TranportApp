@@ -45,7 +45,6 @@ export class AuthService {
     }
 
     logout(): void {
-      localStorage.setItem('isLoggedIn', 'false');
-      localStorage.removeItem('pass');
+      localStorage.clear();
     }
 }
