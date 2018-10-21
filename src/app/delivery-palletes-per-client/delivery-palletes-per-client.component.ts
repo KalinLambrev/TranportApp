@@ -1,3 +1,4 @@
+import { Statuses } from './../statuses';
 import { FormControl, Validators } from '@angular/forms';
 import { ICustomer } from './../customer';
 import { DisplayClient } from './../display-client';
@@ -46,6 +47,7 @@ export class DeliveryPalletesPerClientComponent implements OnInit {
     'style': 'border: solid black'
   };
   sign;
+  status = new Statuses();
   ngOnInit() {
     this.getClient();
     this.getClientInfo();
@@ -88,5 +90,14 @@ export class DeliveryPalletesPerClientComponent implements OnInit {
   showSignature() {
     this.signaturePad.fromDataURL(this.sign);
     this.show = false;
+  }
+
+  setDeliveterStatus(pall: IPalet) {
+    const stat = this.status.statusReceived;
+    return pall.status = stat,
+    console.log(pall);
+  }
+  setReturnedStatus(pall) {
+
   }
 }

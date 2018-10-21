@@ -10,8 +10,8 @@
             </tr>
             <tr *ngFor="let pall of displayPalletes;">
                 <td>{{pall.palletId}}</td>
-                <td><button>+</button></td>
-                <td><button>x</button></td><br>
+                <td><button (click)="setDeliveterStatus(pall)">+</button></td>
+                <td><button (click)="setReturnedStatus(pall)">x</button></td><br>
             </tr>
         </table>
     </div>
