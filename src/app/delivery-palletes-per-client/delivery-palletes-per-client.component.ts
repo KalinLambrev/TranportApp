@@ -30,7 +30,8 @@ export class DeliveryPalletesPerClientComponent implements OnInit {
   statement;
   selected;
   show = true;
-  selectedValue: string;
+  showImg = true;
+  click = 0;
   selecting: DropDownMenu[] = [
     {value: '0', viewValue: 'Приемане без забележки'},
     {value: '1', viewValue: 'Приемане и връщане'},
@@ -49,7 +50,7 @@ export class DeliveryPalletesPerClientComponent implements OnInit {
   sign;
   status = new Statuses();
   comment;
-  fileToUpload;
+  image;
   ngOnInit() {
     this.getClient();
     this.getClientInfo();
@@ -96,8 +97,14 @@ export class DeliveryPalletesPerClientComponent implements OnInit {
     this.show = true;
   }
   showSignature() {
-    this.signaturePad.fromDataURL(this.sign);
-    this.show = false;
+    if (this.click === 0) {
+      this.signaturePad.fromDataURL(this.sign);
+      this.show = false;
+      this.click += 1;
+    } else {
+      this.show = true;
+      this.click = 0;
+    }
   }
 
   setDeliveterStatus(pall: IPalet) {
@@ -112,17 +119,29 @@ export class DeliveryPalletesPerClientComponent implements OnInit {
     console.log(pall),
     console.log(this.displayPalletes);
   }
-  onFileChanged(event) {
-    this.fileToUpload = event.target.files[0];
-    console.log(this.fileToUpload);
+  showPic () {
+      if (this.click === 0) {
+        console.log('Better', this.image);
+        this.showImg = false;
+        this.click += 1;
+        return this.image;
+      } else {
+        this.showImg = true;
+        this.click = 0;
+      }
   }
-  showPic (event) {
-    if (event.target.files && event.target.files[0]) {
-      const reader = new FileReader();
-      reader.readAsDataURL(event.target.files[0]); // read file as data url
-      reader.onload = (eve) => { // called once readAsDataURL is completed
-        this.fileToUpload = event.target.result;
-      };
-    }
+
+  changeListener($event): void {
+    this.readThis($event.target);
+  }
+  readThis(inputValue: any): void {
+    const file: File = inputValue.files[0];
+    const myReader: FileReader = new FileReader();
+
+    myReader.onloadend = (e) => {
+      this.image = myReader.result;
+      console.log('ASDASD', this.image);
+    };
+    myReader.readAsDataURL(file);
   }
 }

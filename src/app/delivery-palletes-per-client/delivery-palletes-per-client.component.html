@@ -33,7 +33,7 @@
         <div><input *ngIf="selected==='5'" #comm (keyup)="onComment(comm.value)" [hidden]="false" type="text"></div>
         <button (click)="makeSignature()">ПОДПИС</button>
         <button (click)="showSignature()">ПОКАЖИ</button>
-        <input type="file" accept="image/gif, image/jpeg, image/png" #fileInput (change)="onFileChanged($event)" style="display: none">
+        <input type="file" accept="image/gif, image/jpeg, image/png" #fileInput (change)="changeListener($event)" style="display: none">
         <button (click)="fileInput.click()">ЗАПИШИ ФАИЛ</button>
         <button (click)="showPic()">ВИЖ</button>
         <p><button>ЗАПАЗИ</button></p>
@@ -43,4 +43,5 @@
         <button (click)="drawComplete()">Запази</button>
         <button (click)="AfterViewInit()">Изчисти</button>
     </div>
+    <img src={{image}} [hidden]="showImg" style="width: 200px">
 </div>
