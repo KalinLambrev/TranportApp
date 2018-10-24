@@ -1,3 +1,4 @@
+<!doctype html>
 <div>
     <div>
         <h3>
@@ -27,13 +28,14 @@
                     </mat-option>
                 </mat-select>
                 <mat-error *ngIf="selectingControl.hasError('required')">Моля изберете възможност</mat-error>
-                <mat-hint><input *ngIf="[value]==5" show="true" type="text"></mat-hint>
             </mat-form-field>
         </li>
+        <div><input *ngIf="selected==='5'" #comm (keyup)="onComment(comm.value)" [hidden]="false" type="text"></div>
         <button (click)="makeSignature()">ПОДПИС</button>
         <button (click)="showSignature()">ПОКАЖИ</button>
-        <button>ЗАРЕДИ СНИМКА</button>
-        <button>ВИЖ</button>
+        <input type="file" accept="image/gif, image/jpeg, image/png" #fileInput (change)="onFileChanged($event)" style="display: none">
+        <button (click)="fileInput.click()">ЗАПИШИ ФАИЛ</button>
+        <button (click)="showPic()">ВИЖ</button>
         <p><button>ЗАПАЗИ</button></p>
     </div>
     <div [hidden]="show">
@@ -41,6 +43,4 @@
         <button (click)="drawComplete()">Запази</button>
         <button (click)="AfterViewInit()">Изчисти</button>
     </div>
-    <angular-file-uploader [config]="">
-    </angular-file-uploader>
 </div>

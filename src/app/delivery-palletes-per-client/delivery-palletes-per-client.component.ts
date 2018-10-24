@@ -26,7 +26,7 @@ export class DeliveryPalletesPerClientComponent implements OnInit {
   displayPalletes: IPalet[];
   customer;
   cols = this.paleteService.getClientCompColumns();
-  value;
+  valueSum;
   statement;
   selected;
   show = true;
@@ -48,6 +48,8 @@ export class DeliveryPalletesPerClientComponent implements OnInit {
   };
   sign;
   status = new Statuses();
+  comment;
+  fileToUpload;
   ngOnInit() {
     this.getClient();
     this.getClientInfo();
@@ -68,8 +70,14 @@ export class DeliveryPalletesPerClientComponent implements OnInit {
       }
     }
   }
+
+  onComment(value: string) {
+    return this.comment = value,
+    console.log(this.comment);
+   }
   onEnter(value: string) {
-   return this.value = value;
+   return this.valueSum = value,
+   console.log(this.valueSum);
   }
   onStatement(value: string) {
     return this.statement = value;
@@ -95,9 +103,26 @@ export class DeliveryPalletesPerClientComponent implements OnInit {
   setDeliveterStatus(pall: IPalet) {
     const stat = this.status.statusReceived;
     return pall.status = stat,
-    console.log(pall);
+    console.log(pall),
+    console.log(this.displayPalletes);
   }
-  setReturnedStatus(pall) {
-
+  setReturnedStatus(pall: IPalet) {
+    const stat = this.status.statusReturned;
+    return pall.status = stat,
+    console.log(pall),
+    console.log(this.displayPalletes);
+  }
+  onFileChanged(event) {
+    this.fileToUpload = event.target.files[0];
+    console.log(this.fileToUpload);
+  }
+  showPic (event) {
+    if (event.target.files && event.target.files[0]) {
+      const reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
+      reader.onload = (eve) => { // called once readAsDataURL is completed
+        this.fileToUpload = event.target.result;
+      };
+    }
   }
 }
